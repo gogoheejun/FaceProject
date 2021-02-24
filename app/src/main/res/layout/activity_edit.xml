@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp"
+    tools:context=".EditActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/EditActivity_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="게시물 만들기"
+        android:background="@color/white"
+        app:titleTextColor="@color/black"
+        >
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/EditActivity_iv_profile"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/ic_launcher"/>
+        <TextView
+            android:id="@+id/EditActivity_tv_profileName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/EditActivity_iv_profile"
+            android:layout_marginLeft="10dp"
+            android:text="이름"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"/>
+
+
+    </RelativeLayout>
+
+
+
+        <EditText
+            android:id="@+id/et_msg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:inputType="textMultiLine"
+            android:hint="무슨 생각을 하고 계신가요?"
+            android:padding="8dp"
+            android:background="@drawable/bg_edit"
+            android:layout_marginTop="8dp"/>
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@drawable/bg_edit"
+            android:padding="4dp"/>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="select image"
+        android:layout_gravity="right"
+        android:onClick="clickSelectImage" />
+
+</LinearLayout>

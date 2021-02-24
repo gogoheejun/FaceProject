@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+        android:id="@+id/biglayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileimg"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/ic_launcher"/>
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/profileimg"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="2dp"
+            android:maxLines="1"
+            android:text="Android Develoment"
+            android:textColor="#FF333333"
+            android:textSize="16sp" />
+        <TextView
+            android:id="@+id/tv_dates"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2021년 1월 8일 11:40"
+            android:layout_below="@id/tv_name"
+            android:layout_alignLeft="@id/tv_name"/>
+
+        <TextView
+            android:id="@+id/tv_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/profileimg"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="10dp"
+            android:text="안드로이드 앱을 만들어줍니다"
+            android:textColor="#FF333333"
+            android:textSize="12dp" />
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:scaleType="centerCrop"
+            android:layout_below="@id/tv_msg"
+            android:src="@drawable/newyork"
+            android:layout_marginBottom="10dp"/>
+
+
+        <ToggleButton
+            android:id="@+id/tb_favor"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_below="@id/iv"
+            android:layout_alignParentLeft="true"
+
+            android:background="@drawable/bg_favor_select"
+            android:textOff=" "
+            android:textOn=" " />
+
+        <TextView
+            android:id="@+id/tv_likes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/tb_favor"
+            android:text="15개"
+            android:textColor="#FF555555"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="댓글달기"
+            android:layout_below="@id/iv"
+            android:layout_centerHorizontal="true"
+            android:layout_alignTop="@id/tb_favor"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="댓글 3개"
+            android:layout_alignRight="@id/iv"
+            android:layout_alignTop="@id/tb_favor"/>
+
+
+    </RelativeLayout>
+
+
+
+    <!-- 구분선 그리기  -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_below="@id/biglayout"
+        android:background="#FFAAAAAA" />
+
+</RelativeLayout>
