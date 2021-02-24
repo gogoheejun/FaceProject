@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
 
         tvNickname = findViewById(R.id.tv_nickname);
         tvEmail = findViewById(R.id.tv_email);
-        ivProfile = findViewById(R.id.iv_msg);
+//        ivProfile = findViewById(R.id.iv_msg);
 
         //키 해시값 얻어와서 Logcat창에 출력하기  - 카카오개발자 키해시값 등록해야 해서
         String keyHash = Utility.INSTANCE.getKeyHash(this);

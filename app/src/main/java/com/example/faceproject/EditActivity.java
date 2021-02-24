@@ -17,6 +17,7 @@
  import android.view.View;
  import android.widget.EditText;
  import android.widget.ImageView;
+ import android.widget.TextView;
  import android.widget.Toast;
 
  import com.bumptech.glide.Glide;
@@ -25,6 +26,7 @@
  import java.util.HashMap;
  import java.util.Map;
 
+ import de.hdodenhof.circleimageview.CircleImageView;
  import okhttp3.MediaType;
  import okhttp3.MultipartBody;
  import okhttp3.RequestBody;
@@ -39,6 +41,8 @@
 
      String imgPath; //업로드할 이미지의 절대경로
 
+     CircleImageView civ;
+     TextView writername;
 
      @Override
      protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,11 @@
          setContentView(R.layout.activity_edit);
          etMsg= findViewById(R.id.et_msg);
          iv= findViewById(R.id.iv_msg);
+         civ = findViewById(R.id.EditActivity_iv_profile);
+         writername = findViewById(R.id.EditActivity_tv_profileName);
+
+         Glide.with(this).load(GUser.profileUrl).into(civ);
+         writername.setText(GUser.nickname);
 
          Toolbar toolbar = findViewById(R.id.EditActivity_toolbar);
          setSupportActionBar(toolbar);
@@ -151,6 +160,7 @@
              @Override
              public void onFailure(Call<String> call, Throwable t) {
                  Toast.makeText(EditActivity.this, "error : "+t.getMessage(), Toast.LENGTH_SHORT).show();
+                 Log.d("upload", "onFailure: "+t.getMessage());
              }
          });
 

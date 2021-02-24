@@ -2,6 +2,7 @@ package com.example.faceproject;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,8 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.VH> {
 
     Context context;
     ArrayList<MarketItem> items;
-    int parentNo;
+    String parentNo;
+    String commentsNum;
 
     public MarketAdapter(Context context, ArrayList<MarketItem> items) {
         this.context = context;
@@ -37,6 +39,7 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.VH> {
     @NonNull
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Log.d("commentsnum", "111");
         LayoutInflater inflater= LayoutInflater.from(context);
         View itemView= inflater.inflate(R.layout.recycler_item, parent, false);
         VH vh= new VH(itemView);
@@ -45,7 +48,7 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.VH> {
 
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
-
+        Log.d("commentsnum", "222");
         MarketItem item= items.get(position);
 
         //이미지 설정 [DB에는 이미지경로가 "./uploads/IMG_20210240_moana01.jpg"임]
@@ -60,46 +63,75 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.VH> {
         holder.tvWriternickname.setText(item.writerNickname);
         holder.tvMsg.setText(item.msg);
         holder.tvlikes.setText(item.likesNum);
-        holder.tvComments.setText(item.commentsNum);
         holder.tvdates.setText(item.date);
+
+//        holder.tvCommentsNum.setText(commentsNum);//getCommentsNum()함수 안으로 이동
 
         //좋아요 토글버튼
         if(item.favor==0) holder.tbFavor.setChecked(false);
         else holder.tbFavor.setChecked(true);
-        //holder.tbFavor.setChecked((item.favor==1)?true:false);
 
-        parentNo = item.no;
+        holder.parentnum = item.no;
+        getCommentsNum(item.no, holder);
+    }
+
+
+    public void getCommentsNum(int parentNo, VH holder){//게시판글의 no와 뷰홀더를 인자로 받아온다!
+        //parentNo의 댓글수 갖고오기
+        Retrofit retrofit = RetrofitHelper.getRetrofitInstanceGson();
+        RetrofitService retrofitService = retrofit.create(RetrofitService.class);
+        Call<String> call = retrofitService.loadCommentsNumFromServer(parentNo+""); //★loadCommentsNum.php
+
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                commentsNum = response.body();
+//                Toast.makeText(context, commentsNum, Toast.LENGTH_SHORT).show();
+                holder.tvCommentsNum.setText("댓글 "+commentsNum+"개");
+
+                Log.d("commentsnum", "갖고옴: parentNo:"+parentNo+"  commentsnum: "+commentsNum);
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Toast.makeText(context, "error : "+t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.d("commentsnum", "onFailure: "+t.getMessage());
+            }
+        });
+        return;
     }
 
     @Override
     public int getItemCount() {
+        Log.d("commentsnum", "444");
         return items.size();
     }
 
 
     //뷰홀더 이너클래스
     class VH extends RecyclerView.ViewHolder{
-
         ImageView ivProfile;
         ImageView ivMsg;
         TextView tvWriternickname;
         TextView tvMsg;
         TextView tvlikes;
         TextView tvdates;
-        TextView tvComments;
+        TextView tvCommentsNum;
         ToggleButton tbFavor;
+        int parentnum;
 
         TextView gotocomment;
 
         public VH(@NonNull View itemView) {
             super(itemView);
+            Log.d("commentsnum", "555");
 
             ivProfile= itemView.findViewById(R.id.profileimg);
             tvWriternickname = itemView.findViewById(R.id.tv_name);
             tvMsg= itemView.findViewById(R.id.tv_msg);
             ivMsg = itemView.findViewById(R.id.iv_msg);
             tvlikes = itemView.findViewById(R.id.tv_likes);
-            tvComments = itemView.findViewById(R.id.tv_comments);
+            tvCommentsNum = itemView.findViewById(R.id.tv_commentsNum);
             tbFavor= itemView.findViewById(R.id.tb_favor);
             tvdates = itemView.findViewById(R.id.tv_dates);
             gotocomment = itemView.findViewById(R.id.gotoComment);
@@ -135,13 +167,31 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.VH> {
                 public void onClick(View v) {
                     //댓글쓰는 창으로 이동
                     Intent intent = new Intent(context, WritecommentActivity.class);
-                    intent.putExtra("parentNo",parentNo);
+                    intent.putExtra("parentNo",parentnum);
                     context.startActivity(intent);
                 }
             });
-
-
-
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, parentnum+"", Toast.LENGTH_SHORT).show();
+                }
+            });
+            tvCommentsNum.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //댓글쓰는 창으로 이동
+                    Intent intent = new Intent(context, WritecommentActivity.class);
+                    intent.putExtra("parentNo",parentnum);
+                    context.startActivity(intent);
+                }
+            });
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, parentnum+"", Toast.LENGTH_SHORT).show();
+                }
+            });
 
         }
     }

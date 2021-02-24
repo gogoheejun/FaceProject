@@ -13,6 +13,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface RetrofitService {
 
@@ -25,10 +26,27 @@ public interface RetrofitService {
     Call<String> postDataToServer(@PartMap Map<String, String> dataPart,
                                   @Part MultipartBody.Part filePart);
 
+    @Multipart
+    @POST("/Market2/commentInsert.php")
+    Call<String> postCommentsToServer(@PartMap Map<String, String> dataPart);
+
 
     //서버에서 데이터를 json으로 파싱하여 가져오는 추상메소드
     @GET("/Market2/loadDB.php")
     Call<ArrayList<MarketItem>> loadDataFromServer();
+
+    //코멘트 가지고 오기
+    @GET("/Market2/loadComments.php")
+    Call<ArrayList<CommentItem>> loadCommentsFromServer(@Query("parentNo") String parentNo);
+
+    //코멘트 수 가져오기
+    @GET("/Market2/loadCommentsNum.php")
+    Call<String> loadCommentsNumFromServer(@Query("parentNo") String parentNo);
+
+    //게시판글의 no가져오기
+    @GET("/Market2/loadBigNo.php")
+    Call<String> loadBigNumFromServer(@Query("time") String BigNo);
+
 
     //"좋아요" 클릭으로 데이터의 변경을 시키는 작업을 해주는 php를 실행시키기
     @PUT("/Market2/{fileName}")

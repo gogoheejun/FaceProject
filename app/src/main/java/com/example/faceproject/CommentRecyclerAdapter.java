@@ -1,12 +1,9 @@
 package com.example.faceproject;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.service.controls.templates.TemperatureControlTemplate;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,9 +33,9 @@ public class CommentRecyclerAdapter extends RecyclerView.Adapter<CommentRecycler
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
         CommentItem item = items.get(position);
-        Glide.with(context).load(item.writerProfile).into(holder.profileImg);
+        Glide.with(context).load(item.writerProfileUrl).into(holder.profileImg);
         holder.tv_nickname.setText(item.writerNickname);
-        holder.tv_msg.setText(item.commentMsg);
+        holder.tv_msg.setText(item.msg);
     }
 
     @Override

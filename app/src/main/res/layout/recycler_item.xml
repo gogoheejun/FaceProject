@@ -78,25 +78,42 @@
             android:text="15개"
             android:textColor="#FF555555"
             android:textSize="14sp"
-            android:textStyle="bold" />
+            />
 
-        <TextView
-            android:id="@+id/gotoComment"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="댓글달기"
-            android:layout_below="@id/iv_msg"
             android:layout_centerHorizontal="true"
             android:layout_alignTop="@id/tb_favor"
-            android:onClick="click_comment"/>
+            android:layout_below="@id/iv_msg">
+            <ImageView
+                android:id="@+id/icon_comment"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/icon_comment"/>
+
+            <TextView
+                android:id="@+id/gotoComment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:text="댓글달기"
+                android:textSize="14sp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/icon_comment"
+                android:onClick="click_comment"/>
+        </RelativeLayout>
+
 
         <TextView
-            android:id="@+id/tv_comments"
+            android:id="@+id/tv_commentsNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="댓글 3개"
+            android:textSize="14sp"
             android:layout_alignRight="@id/iv_msg"
-            android:layout_alignTop="@id/tb_favor"/>
+            android:layout_alignTop="@id/tb_favor"
+            android:layout_marginTop="5dp"/>
 
 
     </RelativeLayout>

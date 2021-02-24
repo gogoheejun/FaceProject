@@ -4,15 +4,20 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,15 +30,20 @@ public class MainActivity extends AppCompatActivity {
     MarketAdapter adapter;
 
     SwipeRefreshLayout refreshLayout;
+    CircleImageView profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        profile = findViewById(R.id.main_profile);
+
         recyclerView= findViewById(R.id.recycler);
         adapter= new MarketAdapter(this, items);
         recyclerView.setAdapter(adapter);
 
+        Glide.with(this).load(GUser.profileUrl).into(profile);
 
 
         refreshLayout = findViewById(R.id.layout_refresh);
@@ -52,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, permissions, 100);
         }
     }
+
 
     @Override
     protected void onResume() {
@@ -75,10 +86,12 @@ public class MainActivity extends AppCompatActivity {
                     items.add(0, item);
                     adapter.notifyItemInserted(0);
                 }
+                Log.d("main", "loadData: items에 추가");
             }
 
             @Override
             public void onFailure(Call<ArrayList<MarketItem>> call, Throwable t) {
+                Log.d("main", "loadData: 에러"+t.getMessage());
             }
         });
     }
