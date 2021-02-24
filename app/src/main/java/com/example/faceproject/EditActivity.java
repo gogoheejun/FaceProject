@@ -1,22 +1,23 @@
  package com.example.faceproject;
 
+ import androidx.annotation.NonNull;
+ import androidx.annotation.Nullable;
+ import androidx.appcompat.app.AppCompatActivity;
+ import androidx.appcompat.widget.Toolbar;
+ import androidx.loader.content.CursorLoader;
+
  import android.content.Intent;
  import android.database.Cursor;
  import android.net.Uri;
  import android.os.Bundle;
  import android.provider.MediaStore;
+ import android.util.Log;
  import android.view.Menu;
  import android.view.MenuItem;
  import android.view.View;
  import android.widget.EditText;
  import android.widget.ImageView;
  import android.widget.Toast;
-
- import androidx.annotation.NonNull;
- import androidx.annotation.Nullable;
- import androidx.appcompat.app.AppCompatActivity;
- import androidx.appcompat.widget.Toolbar;
- import androidx.loader.content.CursorLoader;
 
  import com.bumptech.glide.Glide;
 
@@ -33,23 +34,23 @@
  import retrofit2.Retrofit;
 
  public class EditActivity extends AppCompatActivity {
-     EditText etName, etMsg;
+     EditText etMsg;
      ImageView iv;
 
      String imgPath; //업로드할 이미지의 절대경로
 
 
      @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit);
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_edit);
          etMsg= findViewById(R.id.et_msg);
-         iv= findViewById(R.id.iv);
+         iv= findViewById(R.id.iv_msg);
 
          Toolbar toolbar = findViewById(R.id.EditActivity_toolbar);
          setSupportActionBar(toolbar);
          getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
+     }
 
      @Override
      public boolean onCreateOptionsMenu(Menu menu) {
@@ -113,8 +114,9 @@
 
 
          //전송할 데이터들 [ name, title, msg, price, imgPath ]
-         String nickname= etName.getText().toString();
+         Log.d("edittext",etMsg.getText().toString());
          String msg= etMsg.getText().toString();
+
          //레트로핏 작업 5단계
          Retrofit retrofit= RetrofitHelper.getRetrofitInstanceScalars();
          RetrofitService retrofitService= retrofit.create(RetrofitService.class);
@@ -123,8 +125,8 @@
          MultipartBody.Part filePart= null;
          if(imgPath!=null){
              File file= new File(imgPath);
-             RequestBody requestBody= RequestBody.create(MediaType.parse("image/*"), file);
-             filePart= MultipartBody.Part.createFormData("img", file.getName(), requestBody);
+             RequestBody requestBody= RequestBody.create(MediaType.parse("image/*"), file); //mime타입 및 file을 포장..즉 requestbody는 택배상자, multipartbody는 택배트럭!
+             filePart= MultipartBody.Part.createFormData("img", file.getName(), requestBody); //서버에서 받는 식별자, 파일의이름, 택배상자
          }
 
          //나머지 String 데이터들은 Map Collection에 저장 : @PartMap
@@ -136,7 +138,6 @@
          dataPart.put("msg", msg);
          dataPart.put("likesNum",11+""); //기본값 설정해줌
          dataPart.put("commentsNum",10+"");
-
 
          //글정보와 사진정보 함께 전달
          Call<String> call = retrofitService.postDataToServer(dataPart, filePart);

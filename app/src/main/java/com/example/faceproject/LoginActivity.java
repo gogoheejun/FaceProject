@@ -1,13 +1,13 @@
 package com.example.faceproject;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.kakao.sdk.auth.LoginClient;
@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
 
         tvNickname = findViewById(R.id.tv_nickname);
         tvEmail = findViewById(R.id.tv_email);
-        ivProfile = findViewById(R.id.iv);
+        ivProfile = findViewById(R.id.iv_msg);
 
         //키 해시값 얻어와서 Logcat창에 출력하기  - 카카오개발자 키해시값 등록해야 해서
         String keyHash = Utility.INSTANCE.getKeyHash(this);
@@ -50,8 +50,6 @@ public class LoginActivity extends AppCompatActivity {
                     //카카오디벨로퍼에서, 내어플리케이션/제품설정/카카오로그인/동의항목 에서 설정먼저해주셈
                     Toast.makeText(LoginActivity.this,"로그인성공",Toast.LENGTH_SHORT).show();
 
-
-
                     //로그인한 계정정보 얻어오기
                     UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
                         @Override
@@ -65,20 +63,17 @@ public class LoginActivity extends AppCompatActivity {
 //                                Glide.with(LoginActivity.this).load(profileImageUrl).into(ivProfile);
 
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
-
-
                                 //원래는 다시 로그인안하게 하려면 sharedpreference나 서버에다가 저장해서 불러오게해야함
-
                             }else{
                                 Toast.makeText(LoginActivity.this, "사용자 정보요청 실패: "+throwable.getMessage(), Toast.LENGTH_SHORT).show();
-                                Log.d("loginfailed", throwable.getMessage());
-                           }
+                            }
                             return null;
                         }
                     });
 
                 }else{
                     Toast.makeText(LoginActivity.this, "로그인실패: "+throwable, Toast.LENGTH_SHORT).show();
+                    Log.d("login", "_"+throwable.getMessage());
                 }
                 return null;
             }
@@ -92,6 +87,7 @@ public class LoginActivity extends AppCompatActivity {
             public Unit invoke(Throwable throwable) {
                 if(throwable!=null){  //throwable이 있다는 건 에러가 있다는것임
                     Toast.makeText(LoginActivity.this, "로그아웃실패", Toast.LENGTH_SHORT).show();
+                    Log.d("login",throwable.getMessage());
                 }else{
                     Toast.makeText(LoginActivity.this, "로그아웃", Toast.LENGTH_SHORT).show();
 

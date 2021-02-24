@@ -48,7 +48,7 @@
             android:textSize="12dp" />
 
         <ImageView
-            android:id="@+id/iv"
+            android:id="@+id/iv_msg"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:scaleType="centerCrop"
@@ -61,9 +61,8 @@
             android:id="@+id/tb_favor"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:layout_below="@id/iv"
+            android:layout_below="@id/iv_msg"
             android:layout_alignParentLeft="true"
-
             android:background="@drawable/bg_favor_select"
             android:textOff=" "
             android:textOn=" " />
@@ -72,7 +71,7 @@
             android:id="@+id/tv_likes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/iv"
+            android:layout_below="@id/iv_msg"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@id/tb_favor"
@@ -82,18 +81,21 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/gotoComment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="댓글달기"
-            android:layout_below="@id/iv"
+            android:layout_below="@id/iv_msg"
             android:layout_centerHorizontal="true"
-            android:layout_alignTop="@id/tb_favor"/>
+            android:layout_alignTop="@id/tb_favor"
+            android:onClick="click_comment"/>
 
         <TextView
+            android:id="@+id/tv_comments"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="댓글 3개"
-            android:layout_alignRight="@id/iv"
+            android:layout_alignRight="@id/iv_msg"
             android:layout_alignTop="@id/tb_favor"/>
 
 

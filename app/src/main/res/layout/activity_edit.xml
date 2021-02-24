@@ -44,22 +44,22 @@
 
 
 
-        <EditText
-            android:id="@+id/et_msg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="top"
-            android:inputType="textMultiLine"
-            android:hint="무슨 생각을 하고 계신가요?"
-            android:padding="8dp"
-            android:background="@drawable/bg_edit"
-            android:layout_marginTop="8dp"/>
-        <ImageView
-            android:id="@+id/iv"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@drawable/bg_edit"
-            android:padding="4dp"/>
+    <EditText
+        android:id="@+id/et_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:hint="무슨 생각을 하고 계신가요?"
+        android:padding="8dp"
+        android:background="@drawable/bg_edit"
+        android:layout_marginTop="8dp"/>
+    <ImageView
+        android:id="@+id/iv_msg"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/bg_edit"
+        android:padding="4dp"/>
 
 
     <Button
