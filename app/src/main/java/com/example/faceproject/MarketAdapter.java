@@ -39,7 +39,7 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.VH> {
     @NonNull
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.d("commentsnum", "111");
+        Log.d("commentsnum", "111onCreateViewHolder");
         LayoutInflater inflater= LayoutInflater.from(context);
         View itemView= inflater.inflate(R.layout.recycler_item, parent, false);
         VH vh= new VH(itemView);
@@ -48,7 +48,7 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.VH> {
 
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
-        Log.d("commentsnum", "222");
+        Log.d("commentsnum", "222onBindViewHolder");
         MarketItem item= items.get(position);
 
         //이미지 설정 [DB에는 이미지경로가 "./uploads/IMG_20210240_moana01.jpg"임]
@@ -103,7 +103,7 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.VH> {
 
     @Override
     public int getItemCount() {
-        Log.d("commentsnum", "444");
+        Log.d("commentsnum", "444getItemCount");
         return items.size();
     }
 
@@ -124,7 +124,7 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.VH> {
 
         public VH(@NonNull View itemView) {
             super(itemView);
-            Log.d("commentsnum", "555");
+            Log.d("commentsnum", "555VH");
 
             ivProfile= itemView.findViewById(R.id.profileimg);
             tvWriternickname = itemView.findViewById(R.id.tv_name);
@@ -189,7 +189,7 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.VH> {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, parentnum+"", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context, parentnum+"", Toast.LENGTH_SHORT).show();
                 }
             });
 

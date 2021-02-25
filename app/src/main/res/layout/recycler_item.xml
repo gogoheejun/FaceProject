@@ -41,11 +41,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/profileimg"
             android:layout_marginLeft="12dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="10dp"
             android:text="안드로이드 앱을 만들어줍니다"
             android:textColor="#FF333333"
-            android:textSize="12dp" />
+            android:textSize="16dp" />
 
         <ImageView
             android:id="@+id/iv_msg"
@@ -75,7 +75,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@id/tb_favor"
-            android:text="15개"
+
             android:textColor="#FF555555"
             android:textSize="14sp"
             />
@@ -88,8 +88,8 @@
             android:layout_below="@id/iv_msg">
             <ImageView
                 android:id="@+id/icon_comment"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:src="@drawable/icon_comment"/>
 
             <TextView
