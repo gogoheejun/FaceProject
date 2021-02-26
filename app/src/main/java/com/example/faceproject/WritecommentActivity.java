@@ -84,12 +84,12 @@ public class WritecommentActivity extends AppCompatActivity {
         RetrofitService retrofitService= retrofit.create(RetrofitService.class);
 
         //이미지파일을 MultipartBody.Part로 포장 : @Part
-        MultipartBody.Part filePart= null;
-        if(GUser.profileUrl!=null){
-            File file= new File(GUser.profileUrl);
-            RequestBody requestBody= RequestBody.create(MediaType.parse("image/*"), file); //mime타입 및 file을 포장..즉 requestbody는 택배상자, multipartbody는 택배트럭!
-            filePart= MultipartBody.Part.createFormData("img", file.getName(), requestBody); //서버에서 받는 식별자, 파일의이름, 택배상자
-        }
+//        MultipartBody.Part filePart= null;
+//        if(GUser.profileUrl!=null){
+//            File file= new File(GUser.profileUrl);
+//            RequestBody requestBody= RequestBody.create(MediaType.parse("image/*"), file); //mime타입 및 file을 포장..즉 requestbody는 택배상자, multipartbody는 택배트럭!
+//            filePart= MultipartBody.Part.createFormData("img", file.getName(), requestBody); //서버에서 받는 식별자, 파일의이름, 택배상자
+//        }
 
         //나머지 String 데이터들은 Map Collection에 저장 : @PartMap
         Map<String, String> dataPart= new HashMap<>();
@@ -114,7 +114,6 @@ public class WritecommentActivity extends AppCompatActivity {
                 Toast.makeText(WritecommentActivity.this, "error : "+t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
     private void loadData() {

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="현재 서버용량 관계로 다음 url만 선택해서 올릴수 있습니다"/>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:scrollbars="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RadioGroup
+                android:id="@+id/rg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <RadioButton
+                    android:id="@+id/selectvideo_box1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:tag="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                    android:text="BigBuckBunny"/>
+
+                <RadioButton
+                    android:id="@+id/selectvideo_box2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:tag="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+                    android:text="ElephantsDream"/>
+
+
+                <RadioButton
+                    android:id="@+id/selectvideo_box3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:tag="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+                    android:text="ForBiggerBlazes"/>
+                <RadioButton
+                    android:id="@+id/selectvideo_box4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:tag="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+                    android:text="ForBiggerEscapes"/>
+                <RadioButton
+                    android:id="@+id/selectvideo_box5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:tag="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4"
+                    android:text="ForBiggerFun"/>
+                <RadioButton
+                    android:id="@+id/selectvideo_box6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:tag="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4"
+                    android:text="ForBiggerJoyrides"/>
+                <RadioButton
+                    android:id="@+id/selectvideo_box7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:tag="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4"
+                    android:text="ForBiggerMeltdowns"/>
+
+                <RadioButton
+                    android:id="@+id/selectvideo_box8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:tag="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4"
+                    android:text="Sintel"/>
+
+                <RadioButton
+                    android:id="@+id/selectvideo_box9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:tag="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4"
+                    android:text="SubaruOutbackOnStreetAndDirt"/>
+
+                <RadioButton
+                    android:id="@+id/selectvideo_box10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:tag="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4"
+                    android:text="VolkswagenGTIReview"/>
+
+                <RadioButton
+                    android:id="@+id/selectvideo_box11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:tag="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4"
+                    android:text="WeAreGoingOnBullrun"/>
+            </RadioGroup>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</LinearLayout>

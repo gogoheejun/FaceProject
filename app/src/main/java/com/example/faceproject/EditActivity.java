@@ -5,18 +5,27 @@
  import androidx.appcompat.app.AppCompatActivity;
  import androidx.appcompat.widget.Toolbar;
  import androidx.loader.content.CursorLoader;
+ import androidx.recyclerview.widget.LinearLayoutManager;
 
+ import android.app.AlertDialog;
+ import android.content.DialogInterface;
  import android.content.Intent;
  import android.database.Cursor;
  import android.net.Uri;
+ import android.os.Build;
  import android.os.Bundle;
  import android.provider.MediaStore;
  import android.util.Log;
+ import android.view.LayoutInflater;
  import android.view.Menu;
  import android.view.MenuItem;
  import android.view.View;
+ import android.widget.CheckBox;
  import android.widget.EditText;
  import android.widget.ImageView;
+ import android.widget.LinearLayout;
+ import android.widget.RadioButton;
+ import android.widget.RadioGroup;
  import android.widget.TextView;
  import android.widget.Toast;
 
@@ -40,9 +49,10 @@
      ImageView iv;
 
      String imgPath; //업로드할 이미지의 절대경로
-
+     String videoPath;
      CircleImageView civ;
      TextView writername;
+
 
      @Override
      protected void onCreate(Bundle savedInstanceState) {
@@ -118,7 +128,7 @@
          return  result;
      }
 
-
+    //최종 오케이
      public void clickComplete() {
 
 
@@ -147,6 +157,7 @@
          dataPart.put("msg", msg);
          dataPart.put("likesNum",11+""); //기본값 설정해줌
          dataPart.put("commentsNum",10+"");
+         dataPart.put("videoPath",videoPath); //다이얼로그에서 설정한 것임
 
          //글정보와 사진정보 함께 전달
          Call<String> call = retrofitService.postDataToServer(dataPart, filePart);
@@ -165,5 +176,39 @@
          });
 
          finish();
+     }
+
+
+     RadioButton rb;
+     public void clickSelectVideo(View view) {
+         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+         LayoutInflater inflater = LayoutInflater.from(this);
+         LinearLayout layout =  (LinearLayout)inflater.inflate(R.layout.dialog_selectvideo,null);
+
+
+         RadioGroup rg = layout.findViewById(R.id.rg);
+         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+             @Override
+             public void onCheckedChanged(RadioGroup group, int checkedId) {
+                rb = layout.findViewById(checkedId);
+             }
+         });
+
+         builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+             @Override
+             public void onClick(DialogInterface dialog, int which) {
+                 videoPath = rb.getTag().toString();
+                 Toast.makeText(EditActivity.this, "동영상 선택완료", Toast.LENGTH_SHORT).show();
+             }
+         });
+         builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+             @Override
+             public void onClick(DialogInterface dialog, int which) {
+
+             }
+         });
+
+        builder.setView(layout).show();
+
      }
  }

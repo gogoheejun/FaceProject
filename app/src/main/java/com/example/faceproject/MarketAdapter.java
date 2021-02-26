@@ -16,6 +16,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.exoplayer2.MediaItem;
+import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.ui.PlayerView;
 
 import java.util.ArrayList;
 
@@ -28,7 +31,6 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.VH> {
 
     Context context;
     ArrayList<MarketItem> items;
-    String parentNo;
     String commentsNum;
 
     public MarketAdapter(Context context, ArrayList<MarketItem> items) {
@@ -53,13 +55,29 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.VH> {
 
         //이미지 설정 [DB에는 이미지경로가 "./uploads/IMG_20210240_moana01.jpg"임]
         //안드로이드에서는 서버(dothome)의 전체 주소가 필요하기에
-        String ivUrl="http://alexang.dothome.co.kr/Market2/"+item.msgImage;
-        Glide.with(context).load(ivUrl).into(holder.ivMsg);
+        if(item.msgImage.length()>29){ //이미지주소가 있다면!
+            holder.pv.setVisibility(View.INVISIBLE);
+            holder.ivMsg.setVisibility(View.VISIBLE);
+            String ivUrl="http://alexang.dothome.co.kr/Market2/"+item.msgImage;
+            Glide.with(context).load(ivUrl).into(holder.ivMsg);
 
-        String ivUrl2=item.writerProfileUrl;
-        Glide.with(context).load(ivUrl2).into(holder.ivProfile);
+
+        }
+
+        Log.d("video", item.videoUrl+"");
+        if(item.videoUrl.length()>1){ //video주소가 있다면!
+            holder.ivMsg.setVisibility(View.INVISIBLE);
+            holder.pv.setVisibility(View.VISIBLE);
+//            String ivUrl="http://alexang.dothome.co.kr/Market2/"+item.msgImage;
+
+            MediaItem mediaItem = MediaItem.fromUri(item.videoUrl);
+            holder.player.setMediaItem(mediaItem);
+            holder.player.prepare();
+        }
 
         //텍스트들 지정
+        String ivUrl2=item.writerProfileUrl;
+        Glide.with(context).load(ivUrl2).into(holder.ivProfile);
         holder.tvWriternickname.setText(item.writerNickname);
         holder.tvMsg.setText(item.msg);
         holder.tvlikes.setText(item.likesNum);
@@ -122,6 +140,9 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.VH> {
 
         TextView gotocomment;
 
+        PlayerView pv;
+        SimpleExoPlayer player;
+
         public VH(@NonNull View itemView) {
             super(itemView);
             Log.d("commentsnum", "555VH");
@@ -129,12 +150,18 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.VH> {
             ivProfile= itemView.findViewById(R.id.profileimg);
             tvWriternickname = itemView.findViewById(R.id.tv_name);
             tvMsg= itemView.findViewById(R.id.tv_msg);
-            ivMsg = itemView.findViewById(R.id.iv_msg);
+
             tvlikes = itemView.findViewById(R.id.tv_likes);
             tvCommentsNum = itemView.findViewById(R.id.tv_commentsNum);
             tbFavor= itemView.findViewById(R.id.tb_favor);
             tvdates = itemView.findViewById(R.id.tv_dates);
             gotocomment = itemView.findViewById(R.id.gotoComment);
+
+            ivMsg = itemView.findViewById(R.id.iv_msg);
+            player = new SimpleExoPlayer.Builder(context).build();
+            pv = itemView.findViewById(R.id.video_msg);
+            pv.setPlayer(player);
+
 //            "좋아요" 하트아이콘을 체크하였을때 서버에 체크값 보내기
             tbFavor.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override

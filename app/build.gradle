@@ -12,6 +12,8 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        //멀티덱스 사용설정 :여기랑 디펜던시 해서 총 두군데만 추가하면됨
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -50,4 +52,10 @@ dependencies {
     implementation "com.kakao.sdk:v2-story:2.3.0" // 카카오스토리
     implementation "com.kakao.sdk:v2-link:2.3.0" // 메시지(카카오링크)
     implementation "com.kakao.sdk:v2-navi:2.3.0" // 카카오내비
+
+    //exoplayer library 적용 -https://exoplayer.dev/hello-world.html 버전번호는 최신번호를 찾아서 씀
+    implementation 'com.google.android.exoplayer:exoplayer:2.13.1'
+
+    //멀티덱스 사용라이브러리
+    implementation 'androidx.multidex:multidex:2.0.1'
 }

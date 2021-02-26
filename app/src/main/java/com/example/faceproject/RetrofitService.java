@@ -43,10 +43,6 @@ public interface RetrofitService {
     @GET("/Market2/loadCommentsNum.php")
     Call<String> loadCommentsNumFromServer(@Query("parentNo") String parentNo);
 
-    //게시판글의 no가져오기
-    @GET("/Market2/loadBigNo.php")
-    Call<String> loadBigNumFromServer(@Query("time") String BigNo);
-
 
     //"좋아요" 클릭으로 데이터의 변경을 시키는 작업을 해주는 php를 실행시키기
     @PUT("/Market2/{fileName}")
