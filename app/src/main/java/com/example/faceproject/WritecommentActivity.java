@@ -139,6 +139,7 @@ public class WritecommentActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ArrayList<CommentItem>> call, Throwable t) {
                 Log.d("comment", "loadData: 에러"+t.getMessage());
+                if(t.getMessage().equals("unexpected end of stream")) loadData();
             }
         });
     }

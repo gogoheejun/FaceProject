@@ -6,6 +6,8 @@ import java.util.Map;
 import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -26,6 +28,13 @@ public interface RetrofitService {
     Call<String> postDataToServer(@PartMap Map<String, String> dataPart,
                                   @Part MultipartBody.Part filePart);
 
+    //회원가입
+    @Multipart
+    @POST("/Market2/insertSignup.php")
+    Call<String> postSingupToServer(@PartMap Map<String, String> dataPart,
+                                  @Part MultipartBody.Part filePart);
+
+
     @Multipart
     @POST("/Market2/commentInsert.php")
     Call<String> postCommentsToServer(@PartMap Map<String, String> dataPart);
@@ -42,6 +51,11 @@ public interface RetrofitService {
     //코멘트 수 가져오기
     @GET("/Market2/loadCommentsNum.php")
     Call<String> loadCommentsNumFromServer(@Query("parentNo") String parentNo);
+
+    //로그인..아이디비번 확인
+    @FormUrlEncoded
+    @POST("/Market2/checkId.php")
+    Call<UserItem> checkID(@Field("id")String id, @Field("pw") String pw);
 
 
     //"좋아요" 클릭으로 데이터의 변경을 시키는 작업을 해주는 php를 실행시키기

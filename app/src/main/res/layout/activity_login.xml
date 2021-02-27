@@ -7,14 +7,54 @@
 
     <!--카카오 로그인 버튼-->
     <ImageButton
-        android:layout_width="wrap_content"
+        android:id="@+id/kakaologin"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_margin="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/tv_hello"
         android:src="@drawable/kakao_login_medium_narrow"
         android:background="@android:color/transparent"
         android:onClick="clickLogin"/>
+    <EditText
+        android:id="@+id/login_id"
+        android:layout_below="@id/kakaologin"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:hint="등록 아이디"/>
+    <EditText
+        android:id="@+id/login_pw"
+        android:layout_below="@id/login_id"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:hint="비밀번호"/>
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="로그인"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/login_pw"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/button_bgcolor"
+        android:onClick="clickLogin2"/>
+
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="회원가입"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/button_bgcolor"
+        android:onClick="clickSignup"/>
+
 
     <ImageView
         android:id="@+id/iv_msg"
@@ -34,7 +74,7 @@
         android:layout_centerInParent="true"/>
 
     <TextView
-        android:id="@+id/tv_email"
+        android:id="@+id/tv_hello"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="카카오로 간편하게 로그인하세요"

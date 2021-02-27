@@ -65,7 +65,7 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.VH> {
         }
 
         Log.d("video", item.videoUrl+"");
-        if(item.videoUrl.length()>1){ //video주소가 있다면!
+        if(item.videoUrl.length()>5){ //video주소가 있다면!
             holder.ivMsg.setVisibility(View.INVISIBLE);
             holder.pv.setVisibility(View.VISIBLE);
 //            String ivUrl="http://alexang.dothome.co.kr/Market2/"+item.msgImage;

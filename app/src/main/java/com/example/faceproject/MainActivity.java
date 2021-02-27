@@ -74,12 +74,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        //동적퍼미션
-        String[] permissions= new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
-        if( ActivityCompat.checkSelfPermission(this, permissions[0]) == PackageManager.PERMISSION_DENIED ){
-            ActivityCompat.requestPermissions(this, permissions, 100);
-        }
+//
+//        //동적퍼미션
+//        String[] permissions= new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
+//        if( ActivityCompat.checkSelfPermission(this, permissions[0]) == PackageManager.PERMISSION_DENIED ){
+//            ActivityCompat.requestPermissions(this, permissions, 100);
+//        }
     }
 
 
@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ArrayList<MarketItem>> call, Throwable t) {
                 Log.d("main", "loadData: 에러"+t.getMessage());
+                if(t.getMessage().equals("unexpected end of stream")) loadData();
             }
         });
     }

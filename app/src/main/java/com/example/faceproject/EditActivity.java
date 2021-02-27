@@ -157,7 +157,12 @@
          dataPart.put("msg", msg);
          dataPart.put("likesNum",11+""); //기본값 설정해줌
          dataPart.put("commentsNum",10+"");
-         dataPart.put("videoPath",videoPath); //다이얼로그에서 설정한 것임
+         if(videoPath != null){
+             dataPart.put("videoPath",videoPath); //다이얼로그에서 설정한 것임
+         }else{
+             videoPath="no";
+         }
+
 
          //글정보와 사진정보 함께 전달
          Call<String> call = retrofitService.postDataToServer(dataPart, filePart);

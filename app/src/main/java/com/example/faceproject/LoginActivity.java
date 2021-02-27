@@ -1,11 +1,16 @@
 package com.example.faceproject;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
+import android.content.ClipData;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,29 +21,41 @@ import com.kakao.sdk.common.util.Utility;
 import com.kakao.sdk.user.UserApiClient;
 import com.kakao.sdk.user.model.User;
 
+import java.security.Guard;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class LoginActivity extends AppCompatActivity {
+    EditText et_id, et_pw;
 
-    TextView tvNickname;
-    TextView tvEmail;
-    CircleImageView ivProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        et_id = findViewById(R.id.login_id);
+        et_pw = findViewById(R.id.login_pw);
 
-        tvNickname = findViewById(R.id.tv_nickname);
-        tvEmail = findViewById(R.id.tv_email);
-//        ivProfile = findViewById(R.id.iv_msg);
+
 
         //키 해시값 얻어와서 Logcat창에 출력하기  - 카카오개발자 키해시값 등록해야 해서
         String keyHash = Utility.INSTANCE.getKeyHash(this);
         Log.i("KeyHash",keyHash);
+
+
+        //동적퍼미션
+        String[] permissions= new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,  Manifest.permission.READ_EXTERNAL_STORAGE};
+        if( ActivityCompat.checkSelfPermission(this, permissions[0]) == PackageManager.PERMISSION_DENIED
+            || ActivityCompat.checkSelfPermission(this, permissions[1]) == PackageManager.PERMISSION_DENIED){
+            ActivityCompat.requestPermissions(this, permissions, 100);
+        }
     }
 
     public void clickLogin(View view) {
@@ -81,23 +98,36 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void clickLogout(View view) {
-        UserApiClient.getInstance().logout(new Function1<Throwable, Unit>() {
-            @Override
-            public Unit invoke(Throwable throwable) {
-                if(throwable!=null){  //throwable이 있다는 건 에러가 있다는것임
-                    Toast.makeText(LoginActivity.this, "로그아웃실패", Toast.LENGTH_SHORT).show();
-                    Log.d("login",throwable.getMessage());
-                }else{
-                    Toast.makeText(LoginActivity.this, "로그아웃", Toast.LENGTH_SHORT).show();
+    public void clickSignup(View view) {
+        Intent intent = new Intent(this, SignupActivity.class);
+        startActivity(intent);
+    }
 
-                    //로그인 회원정보 화면들 모두 초기화
-                    tvEmail.setText("이메일");
-                    tvNickname.setText("닉네임");
-                    Glide.with(LoginActivity.this).load(R.mipmap.ic_launcher).into(ivProfile);
-                }
-                return null;
+    public void clickLogin2(View view) {
+        String id = et_id.getText().toString();
+        String pw = et_pw.getText().toString();
+
+        RetrofitService retrofitService = RetrofitHelper.getRetrofitInstanceGson().create(RetrofitService.class);
+        Call<UserItem> call = retrofitService.checkID(id,pw);
+        call.enqueue(new Callback<UserItem>() {
+            @Override
+            public void onResponse(Call<UserItem> call, Response<UserItem> response) {
+                UserItem item = response.body();
+                Log.d(".php", item.profileUrl);
+                GUser.nickname = item.userID;
+                GUser.profileUrl = "http://alexang.dothome.co.kr/Market2/"+item.profileUrl;
+                GUser.userId = Long.parseLong(item.no);
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+
+            }
+
+            @Override
+            public void onFailure(Call<UserItem> call, Throwable t) {
+                Log.d(".php", "failed");
             }
         });
+
     }
 }
