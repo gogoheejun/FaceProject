@@ -114,6 +114,10 @@ public class WritecommentActivity extends AppCompatActivity {
                 Toast.makeText(WritecommentActivity.this, "error : "+t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+        //글씨쓴거 지우기
+        et_comment.getText().clear();
+        loadData();
     }
 
     private void loadData() {
