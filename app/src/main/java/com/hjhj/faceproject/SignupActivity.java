@@ -1,4 +1,4 @@
-package com.example.faceproject;
+package com.hjhj.faceproject;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;

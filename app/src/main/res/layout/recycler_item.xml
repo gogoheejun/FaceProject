@@ -87,6 +87,7 @@
 
             android:textColor="#FF555555"
             android:textSize="14sp"
+            android:visibility="invisible"
             />
 
         <RelativeLayout

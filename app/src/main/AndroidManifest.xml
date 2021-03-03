@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.faceproject">
+    package="com.hjhj.faceproject">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
 
     <application
-        android:name=".MyApplication"
+        android:name="com.hjhj.faceproject.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -17,17 +17,17 @@
         android:theme="@style/Theme.FaceProject"
         android:requestLegacyExternalStorage="true"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SignupActivity"></activity>
-        <activity android:name=".WritecommentActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name="com.hjhj.faceproject.SignupActivity"></activity>
+        <activity android:name="com.hjhj.faceproject.WritecommentActivity" />
+        <activity android:name="com.hjhj.faceproject.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".EditActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.hjhj.faceproject.EditActivity" />
+        <activity android:name="com.hjhj.faceproject.MainActivity">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->

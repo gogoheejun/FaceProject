@@ -1,36 +1,28 @@
-package com.example.faceproject;
+package com.hjhj.faceproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
-import android.content.ClipData;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.kakao.sdk.auth.LoginClient;
 import com.kakao.sdk.auth.model.OAuthToken;
 import com.kakao.sdk.common.util.Utility;
 import com.kakao.sdk.user.UserApiClient;
 import com.kakao.sdk.user.model.User;
 
-import java.security.Guard;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 import kotlin.Unit;
-import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class LoginActivity extends AppCompatActivity {
     EditText et_id, et_pw;

@@ -1,4 +1,4 @@
-package com.example.faceproject;
+package com.hjhj.faceproject;
 
 import android.content.Context;
 import android.content.Intent;

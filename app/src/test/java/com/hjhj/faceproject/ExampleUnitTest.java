@@ -1,4 +1,4 @@
-package com.example.faceproject;
+package com.hjhj.faceproject;
 
 import org.junit.Test;
 
