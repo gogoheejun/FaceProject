@@ -104,14 +104,20 @@ public class LoginActivity extends AppCompatActivity {
         call.enqueue(new Callback<UserItem>() {
             @Override
             public void onResponse(Call<UserItem> call, Response<UserItem> response) {
-                UserItem item = response.body();
-                Log.d(".php", item.profileUrl);
-                GUser.nickname = item.userID;
-                GUser.profileUrl = "http://alexang.dothome.co.kr/Market2/"+item.profileUrl;
-                GUser.userId = Long.parseLong(item.no);
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
+                if(response.body()!=null){
+                    UserItem item = response.body();
+                    Log.d(".php", item.profileUrl);
+                    GUser.nickname = item.userID;
+                    GUser.profileUrl = "http://alexang.dothome.co.kr/Market2/"+item.profileUrl;
+                    GUser.userId = Long.parseLong(item.no);
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    Toast.makeText(LoginActivity.this, "아이디와 비밀번호를 확인하세요", Toast.LENGTH_SHORT).show();
+                }
+                
+             
 
             }
 
